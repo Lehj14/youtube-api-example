@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Exception;
 use Madcoda\Youtube;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class Music extends AbstractController
 {
-    private const YOUTUBE_KEY = 'AIzaSyAULObiRr68JdwweGrq1cyzPtytWDi5Mlc';
+    private const YOUTUBE_KEY = 'xx';
     private const YOUTUBE_CHANNEL_ID = 'UCX06sx2WWYGny7b3XDUyFCQ';
 
     /**
@@ -30,7 +31,7 @@ class Music extends AbstractController
     {
         try {
             $this->youtube = new Youtube(['key' => self::YOUTUBE_KEY]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
@@ -45,7 +46,7 @@ class Music extends AbstractController
         try {
             $playlist = $this->youtube->getPlaylistsByChannelId(self::YOUTUBE_CHANNEL_ID);
             $error = '';
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $error = $e->getMessage();
             $playlist = '';
         }
@@ -71,7 +72,7 @@ class Music extends AbstractController
             $playlist = $this->youtube->getPlaylistsByChannelId(self::YOUTUBE_CHANNEL_ID);
             $video = $this->youtube->getPlaylistItemsByPlaylistId($playlistId);
             $error = '';
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $error = $e->getMessage();
             $video = '';
             $playlist = '';
