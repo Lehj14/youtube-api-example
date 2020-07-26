@@ -1,0 +1,47 @@
+<div class="row">
+    {% if error is defined %}
+        {{ error }}
+    {% endif %}
+</div>
+
+{% if videos is defined %}
+    {% if videos is not empty %}
+        <div class="row">
+            {% for data in videos %}
+                <div class="col-md-6">
+                    <div class="card">
+                        {% set videoId = data.snippet.resourceId.videoId  %}
+                        {% if videos is not empty %}
+                            <div class="card-image">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <figure>
+                                        <iframe src="https://www.youtube.com/embed/{{videoId}}" allow="accelerometer; autoplay;
+                                          encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="560" height="315"></iframe>
+                                    </figure>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="card-content text-white">
+                            <span class="card-title" style="font-family: 'Ubuntu Mono', monospace; font-weight: 700;">{{ data.snippet.title|removeDash }}</span>
+                            <button type="button" id="{{ data.id }}" style="position: relative" class="btn btn-custom pull-right showData" aria-label="Left Align">
+                                <i class="fa fa-ellipsis-v"></i>
+                            </button>
+                        </div><!-- card content -->
+
+                        <div class="card-reveal" id="reveal_{{ data.id }}">
+                            <button type="button" class="close" id="{{ data.id }}" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <p class="card-title" style="font-family: 'Ubuntu Mono', monospace; font-weight: 700;">
+                                {{ data.snippet.title|replace({'- PHP UK 2020' : ' '}) }}
+                            </p>
+                            <p style="font-family: 'Ubuntu Mono', monospace; font-weight: 400;"><b>Published</b> at: {{ data.snippet.publishedAt }}</p>
+                            <p style="font-family: 'Ubuntu Mono', monospace; font-weight: 400;"><b>Description:</b> {{ data.snippet.description }}</p>
+                        </div><!-- card reveal -->
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endif %}
+<script src="{{ asset('javascript/main.js') }}"></script>

@@ -93,6 +93,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.4"
     },
+    "madcoda/php-youtube-api": {
+        "version": "1.2"
+    },
     "monolog/monolog": {
         "version": "2.1.0"
     },
